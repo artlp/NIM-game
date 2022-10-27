@@ -18,9 +18,11 @@ const settingsWindow = document.querySelector('.settings');
 const btnsettings = document.querySelector('#opensettings');
 const btnSetClose = document.querySelector('#closesettings');
 const wrapper = document.querySelector('.wrapper');
+const rangeMaxInput = document.querySelector('#rangemax');
+const maxInput = document.querySelector('#max');
 
 generateButtons();
-document.querySelector("#rangemax").addEventListener("input", generateButtons);
+// rangeMaxInput.addEventListener("input", generateButtons);
 
 function generateButtons() {
     btnDiv.innerHTML = "";
@@ -43,8 +45,11 @@ function generateButtons() {
     }
 }
 btnsettings.addEventListener('click', ()=> {
+    if (gameStarted === 0){
     settingsWindow.classList.remove("hidden");
-    wrapper.classList.add("hidden");
+    wrapper.classList.add("hidden");} else {
+        btnsettings.innerText = "Can't open settings while the game is active!"
+    }
 });
 
 btnSetClose.addEventListener('click', ()=> {
@@ -102,7 +107,7 @@ const computerTurn = () => {
         timeout = setTimeout(alertFunc, 1000);
     }
     function alertFunc() {
-        log.innerText += `Computer has chosen ${compNum}, the sum now is ${sum}\n`;
+        log.innerHTML += `<span>Computer has chosen ${compNum}, the sum now is ${sum}</span> <br>`;
         announce.innerText = `Player's turn`;
     }
     aiThink();
@@ -121,7 +126,7 @@ const playerTurn = () => {
     }
 
     sum += playerNum;
-    log.innerText += `Player has chosen ${playerNum}, the sum now is ${sum}\n`;
+    log.innerHTML += `<span>Player has chosen ${playerNum}, the sum now is ${sum}</span><br>`;
 
     if (!ifWin()) {
 
@@ -170,13 +175,34 @@ const surrender = () => {
     btnSurrender.removeEventListener('click', surrender);
     btnSurrender.classList.replace('btn-enabled', 'btn-disabled');
     btnStart.innerHTML = `Play again`;
+    gameStarted = 0;
+    btnsettings.innerHTML = "Settings";
 
 };
-
+// let inputblock1 = 0;
+// let inputblock2 = 0;
 btnStart.addEventListener('click', start);
-// numInp.addEventListener('change', playerTurn);
-// numInp.addEventListener('input', preventTooBig);
 
+maxInput.addEventListener('change', () => {
+    
+    if (+maxInput.value > maxInput.max) {
+        maxInput.value = maxInput.max; 
+    } else if (maxInput.value < maxInput.min) {
+        maxInput.value = maxInput.min;
+    } else {
+    }
+});
+
+rangeMaxInput.addEventListener('change', () => {
+    // console.log(+rangeMaxInput.value, rangeMaxInput.min, rangeMaxInput.max);
+    // inputblock2 = +rangeMaxInput.max;
+    if (+rangeMaxInput.value > rangeMaxInput.max) {
+        rangeMaxInput.value = rangeMaxInput.max; 
+    } else if (rangeMaxInput.value < rangeMaxInput.min) {
+        rangeMaxInput.value = rangeMaxInput.min;
+    } else {
+    }
+});
 // MISSION: 1. when clicking on "Surrender" - remove listener from "Surrender"
 // and stop the game
 // 2. When starting the game, add listener to "Surrender"

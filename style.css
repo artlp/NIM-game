@@ -2,7 +2,6 @@
 
 * {
     border-radius: 10px;
-  font-family: 'Major Mono Display', monospace;
 }
 body {
     background: linear-gradient(to right,#ff8a00,#da1b60);
@@ -19,7 +18,9 @@ body {
   text-align: center;
 }
 h1 {
+
     box-sizing: border-box;
+  font-family: 'Major Mono Display', monospace;
     font-size: 72px;
     font-weight: 300;
     margin: 2% auto;
@@ -55,6 +56,7 @@ h1 span:hover {
     box-sizing: border-box;
     font-family: 'Noto Sans', sans-serif;
     margin: 5px;
+    max-height: 150px;
     min-height: 30px;
     text-align: center;
     transition: all 0.2s ease-in;
@@ -99,6 +101,38 @@ width: 50px;
 .wrapper input:focus {
     outline: none;
 }
+#log {
+  height: 150px;
+  /* padding: 20px; */
+  max-height: 150px;
+  -ms-overflow-style: none;  /* IE and Edge */
+  overflow-y: scroll;
+  scrollbar-width: none;  
+  /* display:flex;
+  flex-flow: column;
+  gap: 0; */
+}
+#log::-webkit-scrollbar {
+  display:none;
+}
+
+#log {
+  font-family: 'Noto Sans', sans-serif;
+}
+#log span {
+  opacity: 0.7;
+}
+#log span:last-of-type {
+  font-weight: 700;
+  opacity: 1;
+}
+
+#log span:last-of-type::before {
+  content:"▶️";
+  font-weight: 700;
+  opacity: 1;
+}
+
 
 .hidden {
   display:none;
@@ -108,30 +142,45 @@ h3 {
 }
 
 .settings {
-  box-sizing: border-box;
-  padding: 20px;
   border: 3px solid black;
   box-shadow: 2px 4px 0 black;
-  width: 90%;
-  height: 200px;
-  background-color: rgba(255, 0, 0, 0.242);
-  
-  position: absolute;
-  top:0;
-  bottom: 0;
+
+  box-sizing: border-box;
+  font-family: 'Major Mono Display', monospace;
+  font-weight: 500;
+  height: 300px;
   left: 0;
-  right: 0;
-  
   margin: auto;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  width: 90%;
+}
+
+.settingsoption {
+background: rgba(255, 255, 255, 0.5);
+border: 3px solid black;
+box-shadow: 2px 4px 0 black;
+/* font-family: 'Noto Sans', sans-serif; */
+font-weight: 900;
+margin: 10px 0;
+padding: 5px 10px;
+}
+.settingsoption input {
+background: rgba(255, 255, 255, 0.5);
+
+border: none;
+font-weight: 900;
+padding: 2px 10px;
 }
 
 #closesettings {
+  bottom: 25%;
   font-size: 30px;
-  width: 10px;
   height: 10px;
+  left: 97%;
   position: relative;
-  left: 95%;
-  bottom: 40%;
+  width: 10px;
 }
 
 #closesettings:hover{
@@ -142,12 +191,14 @@ h3 {
   outline: none;
 }
 
+#closesettings:hover {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 
 
   /* Animation */
-  
-
-  .waves {
+   .waves {
     height:15vh;
     left: -3px;
     margin-bottom:-4px; /*Fix for safari gap*/
