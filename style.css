@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Noto+Sans&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
 * {
     border-radius: 10px;
 }
@@ -61,11 +66,17 @@ h1 span:hover {
     text-align: center;
     transition: all 0.2s ease-in;
 }
+
+button {
+padding: 5px;
+}
+
 .wrapper > button:hover, .gamebutton:hover {
     background: rgba(255, 255, 255);
     border: 3px solid rgba(0, 0, 0, 0.15);
     box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.25);
     transition: all 0.2s ease-in;
+    font-weight: 600;
 }
 .wrapper > button:active, .gamebutton:active {
     background: black;
@@ -76,6 +87,9 @@ h1 span:hover {
 }
 
 .gamebuttons {
+background: rgba(255, 255, 255, 0);
+border: none;
+box-shadow: none;
   display:flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -88,7 +102,6 @@ background: rgba(255, 255, 255, 0.5);
 border: 3px solid black;
 box-shadow: 2px 4px 0 black;
 margin: 3px;
-padding: 5px 10px;
 width: 50px;
 }
 
@@ -107,10 +120,10 @@ width: 50px;
   max-height: 150px;
   -ms-overflow-style: none;  /* IE and Edge */
   overflow-y: scroll;
-  scrollbar-width: none;  
-  /* display:flex;
-  flex-flow: column;
-  gap: 0; */
+  scrollbar-width: none;
+  /* line-height: 100%; */
+  /* display:flex; */
+  /* flex-flow: column; */
 }
 #log::-webkit-scrollbar {
   display:none;
@@ -119,6 +132,7 @@ width: 50px;
 #log {
   font-family: 'Noto Sans', sans-serif;
 }
+
 #log span {
   opacity: 0.7;
 }
@@ -128,11 +142,38 @@ width: 50px;
 }
 
 #log span:last-of-type::before {
-  content:"▶️";
+  content:"▶ ";
   font-weight: 700;
   opacity: 1;
 }
+#announce {
+  height: 84.4px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.winner {
+  font-weight: 900;
+  font-size: 190%;
+  text-shadow: rgb(255, 255, 255) 0px 0px 10px;
+  text-transform: uppercase;
+}
 
+.winner::before, .winner::after {
+  font-size: 42px;
+  text-shadow: rgb(217, 255, 0) 0px 0px 10px;
+  color: rgb(255, 128, 0);
+  line-height: 50px;  
+  height: 46px;
+  width: 46px;
+  margin: 10px;
+  font-family: courier;
+  content: "☆";
+  animation: 2.5s rotate infinite;
+  animation-timing-function: linear;
+  text-align: center;
+
+}
 
 .hidden {
   display:none;

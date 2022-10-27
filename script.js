@@ -4,7 +4,6 @@
 const btnStart = document.querySelector('#start');
 const btnSurrender = document.querySelector('#surrender');
 const announce = document.querySelector('#announce');
-const numInp = document.querySelector('#num');
 const log = document.querySelector('#log');
 const btnDiv = document.querySelector('.gamebuttons');
 const numberButtons = document.querySelector(".number-buttons");
@@ -14,9 +13,10 @@ const btnSetClose = document.querySelector('#closesettings');
 const wrapper = document.querySelector('.wrapper');
 const rangeMaxInput = document.querySelector('#inputmax');
 const maxInput = document.querySelector('#max');
+const min = 1;
 
 let max = +maxInput.value;
-let rangeMax = +rangeMaxInput.value; // The player may input numbers from 1 to 9
+let rangeMax = +rangeMaxInput.value; 
 let sum;
 let whosTurn;
 let playerNum;
@@ -74,6 +74,8 @@ const start = () => {
     const choosePlayer = ["Player is first", "Computer is first"];
     //let turn = Math.round(Math.random());
     whosTurn = getRand(0, 1);
+    announce.classList.remove("winner")
+
     announce.innerText = choosePlayer[whosTurn];
     btnStart.removeEventListener('click', start);
     btnStart.classList.replace('btn-enabled', 'btn-disabled');
@@ -90,20 +92,17 @@ const getRand = (min, max) => {
 
 
 const computerTurn = () => {
-    // MISSION:
-    // 1. randomly choose number from 1 to 9
-    // 2. add it to the sum, for example, the sum now is 14
-    // 3. show in the log smth like:
-    //    machine: has chosen 9, the sum now is 14
-    // 4. Call this function from the function "start"
-    //    when the 1st turn is computer's
     btnStart.innerHTML = `First to ${max} wins!`;
 
     playerNum = '';
-    let compNum = getRand(1, 9);
-    if (sum + compNum > max) compNum = max - sum;
-    // if the sum will be greater than max,
-    // fix compNum to make the sum be max exactly
+    // let compNum = getRand(min,rangeMax);
+    let compNum;
+    if (sum + rangeMax >= max) {
+        compNum = max - sum
+    } else {
+        compNum = getRand(min,rangeMax);
+    };
+
     sum += compNum;
     announce.innerText = `Computer's turn`;
     function aiThink() {
@@ -111,7 +110,8 @@ const computerTurn = () => {
     }
     function alertFunc() {
         log.innerHTML += `<span>Computer has chosen ${compNum}, the sum now is ${sum}</span> <br>`;
-        announce.innerText = `Player's turn`;
+        if (sum < rangeMax) {
+        announce.innerText = `Player's turn`;}
     }
     aiThink();
     // check if computer has WON 
@@ -120,58 +120,29 @@ const computerTurn = () => {
 };
 
 const playerTurn = () => {
-    // let num = +numInp.value;
     btnStart.innerHTML = `First to ${max} wins!`;
-
-    // if (num < 1 || num > rangeMax || num % 1 !== 0)
-    if (playerNum < 1 || playerNum > rangeMax || !Number.isInteger(playerNum)) {
-        return;
-    }
-
     sum += playerNum;
     log.innerHTML += `<span>Player has chosen ${playerNum}, the sum now is ${sum}</span><br>`;
-
     if (!ifWin()) {
-
         whosTurn = 1;
         computerTurn();
-
     }
 };
 
 const ifWin = () => {
-    console.log(playerNum, sum);
-
+    const whoWon = ['Player won', 'Computer won'];
     if (sum >= max) {
-
-        const whoWon = ['Player won', 'Computer won'];
-        announce.innerText = whoWon[whosTurn];
+        announce.innerHTML = whoWon[whosTurn];
         btnStart.innerHTML = `Play again`;
-
+        announce.classList.add("winner")
         btnStart.addEventListener('click', start);
         btnStart.classList.replace('btn-disabled', 'btn-enabled');
         gameStarted = 0;
         return true;
     }
-
     return false;
-
 };
-
-// const preventTooBig = () => {
-//     let num = +numInp.value;
-
-//     if (num < 1 || num > rangeMax || !Number.isInteger(num)) {
-//         return;
-//     }
-
-//     if (sum + num > max)
-//         numInp.value = '';
-
-// };
-
 const surrender = () => {
-
     announce.innerText = 'You looooose, na-na-na ☠️';
     btnStart.addEventListener('click', start);
     btnStart.classList.replace('btn-disabled', 'btn-enabled');
@@ -180,10 +151,8 @@ const surrender = () => {
     btnStart.innerHTML = `Play again`;
     gameStarted = 0;
     btnsettings.innerHTML = "Settings";
-
 };
-// let inputblock1 = 0;
-// let inputblock2 = 0;
+
 btnStart.addEventListener('click', start);
 
 maxInput.addEventListener('change', () => {
@@ -197,8 +166,6 @@ maxInput.addEventListener('change', () => {
 });
 
 rangeMaxInput.addEventListener('change', () => {
-    // console.log(+rangeMaxInput.value, rangeMaxInput.min, rangeMaxInput.max);
-    // inputblock2 = +rangeMaxInput.max;
     if (+rangeMaxInput.value >= +rangeMaxInput.max) {
         rangeMaxInput.value = +rangeMaxInput.max; 
     } else if (+rangeMaxInput.value <= +rangeMaxInput.min) {
@@ -206,6 +173,3 @@ rangeMaxInput.addEventListener('change', () => {
     } else {
     }
 });
-// MISSION: 1. when clicking on "Surrender" - remove listener from "Surrender"
-// and stop the game
-// 2. When starting the game, add listener to "Surrender"
