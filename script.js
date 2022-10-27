@@ -15,7 +15,7 @@ const min = 1;
 
 let playerName = document.querySelector('#name').value;
 let max = +maxInput.value;
-let rangeMax = +rangeMaxInput.value; 
+let rangeMax = +rangeMaxInput.value;
 let sum;
 let whosTurn;
 let playerNum;
@@ -38,30 +38,32 @@ function generateButtons() {
         btnDiv.appendChild(button);
 
         button.addEventListener("click", function () {
-            if (gameStarted === 1){ 
-            playerNum = +this.value;
-            playerTurn();}
+            if (gameStarted === 1) {
+                playerNum = +this.value;
+                playerTurn();
+            }
 
         });
 
     }
 }
-btnsettings.addEventListener('click', ()=> {
-    if (gameStarted === 0){
-    settingsWindow.classList.remove("hidden");
-    wrapper.classList.add("hidden");} else {
-        btnsettings.innerText = "can't open settings while the game is active!"
+btnsettings.addEventListener('click', () => {
+    if (gameStarted === 0) {
+        settingsWindow.classList.remove("hidden");
+        wrapper.classList.add("hidden");
+    } else {
+        btnsettings.innerText = "can't open settings while the game is active!";
     }
 });
 
-btnSetClose.addEventListener('click', ()=> {
-    rangeMax = +rangeMaxInput.value; 
+btnSetClose.addEventListener('click', () => {
+    rangeMax = +rangeMaxInput.value;
     max = +maxInput.value;
     playerName = document.querySelector('#name').value;
     settingsWindow.classList.add("hidden");
     wrapper.classList.remove("hidden");
     generateButtons();
-})
+});
 
 function progressUpdate() {
     progressBar.max = max;
@@ -75,7 +77,7 @@ const start = () => {
     playerNum = '';
     const choosePlayer = [`${playerName} is first`, `Computer is first`];
     whosTurn = getRand(0, 1);
-    announce.classList.remove("winner")
+    announce.classList.remove("winner");
     announce.innerText = choosePlayer[whosTurn];
     btnStart.removeEventListener('click', start);
     btnStart.classList.replace('btn-enabled', 'btn-disabled');
@@ -98,9 +100,9 @@ const computerTurn = () => {
     // let compNum = getRand(min,rangeMax);
     let compNum;
     if (sum + rangeMax >= max) {
-        compNum = max - sum
+        compNum = max - sum;
     } else {
-        compNum = getRand(min,rangeMax);
+        compNum = getRand(min, rangeMax);
     };
 
     sum += compNum;
@@ -109,12 +111,12 @@ const computerTurn = () => {
         timeout = setTimeout(alertFunc, 800);
     }
     function alertFunc() {
-    progressUpdate()
-
+        progressUpdate();
         log.innerHTML += `<span>Computer has chosen ${compNum}, the sum now is ${sum}</span> <br>`;
-        if ((sum + rangeMax) < max) { 
-        announce.innerText = `${playerName}'s turn`;
-    }
+        log.scrollTop = log.scrollHeight;
+        if ((sum + rangeMax) < max) {
+            announce.innerText = `${playerName}'s turn`;
+        }
     }
     aiThink();
     ifWin();
@@ -124,7 +126,7 @@ const computerTurn = () => {
 const playerTurn = () => {
     btnStart.innerHTML = `First to ${max} wins!`;
     sum += playerNum;
-    progressUpdate()
+    progressUpdate();
     log.innerHTML += `<span>${playerName} has chosen ${playerNum}, the sum now is ${sum}</span><br>`;
     log.scrollTop = log.scrollHeight;
     if (!ifWin()) {
@@ -138,15 +140,15 @@ const ifWin = () => {
     if (sum >= max) {
         function announceWinner() {
             if (whosTurn = 1) {
-            timeout = setTimeout(printWinner, 1200);
+                timeout = setTimeout(printWinner, 1200);
             } else {
-            timeout = setTimeout(printWinner, 100);
+                timeout = setTimeout(printWinner, 100);
             }
         }
         function printWinner() {
             announce.innerHTML = whoWon[whosTurn];
             btnStart.innerHTML = `play again`;
-            announce.classList.add("winner")
+            announce.classList.add("winner");
         }
         announceWinner();
         btnStart.addEventListener('click', start);
@@ -172,9 +174,9 @@ const surrender = () => {
 btnStart.addEventListener('click', start);
 
 maxInput.addEventListener('change', () => {
-    
+
     if (+maxInput.value >= +maxInput.max) {
-        maxInput.value = +maxInput.max; 
+        maxInput.value = +maxInput.max;
     } else if (+maxInput.value <= +maxInput.min) {
         maxInput.value = +maxInput.min;
     } else {
@@ -183,7 +185,7 @@ maxInput.addEventListener('change', () => {
 
 rangeMaxInput.addEventListener('change', () => {
     if (+rangeMaxInput.value >= +rangeMaxInput.max) {
-        rangeMaxInput.value = +rangeMaxInput.max; 
+        rangeMaxInput.value = +rangeMaxInput.max;
     } else if (+rangeMaxInput.value <= +rangeMaxInput.min) {
         rangeMaxInput.value = +rangeMaxInput.min;
     } else {
