@@ -10,12 +10,11 @@
 }
 body {
     background: linear-gradient(to right,#ff8a00,#da1b60);
-    padding: 2% 5%;
+    padding: 1% 5%;
 }
 .header {
   border: 3px solid black;
   box-shadow: 2px 4px 0 black;
-
   box-sizing: border-box;
   box-sizing: border-box;
   margin: 2% auto;
@@ -67,7 +66,9 @@ h1 span:hover {
     transition: all 0.2s ease-in;
 }
 
-button {
+.wrapper button {
+font-family: 'Major Mono Display', monospace;
+font-weight:700;
 padding: 5px;
 }
 
@@ -75,8 +76,8 @@ padding: 5px;
     background: rgba(255, 255, 255);
     border: 3px solid rgba(0, 0, 0, 0.15);
     box-shadow: 2px 4px 0 rgba(0, 0, 0, 0.25);
-    transition: all 0.2s ease-in;
     font-weight: 600;
+    transition: all 0.2s ease-in;
 }
 .wrapper > button:active, .gamebutton:active {
     background: black;
@@ -147,49 +148,54 @@ width: 50px;
   opacity: 1;
 }
 #announce {
-  height: 84.4px;
-  display:flex;
   align-items: center;
+  display:flex;
+  height: 84.4px;
   justify-content: center;
 }
 .winner {
-  font-weight: 900;
+  font-family: 'Major Mono Display', monospace;
+  font-size: 26px;
   font-size: 190%;
+  font-weight: 900;
   text-shadow: rgb(255, 255, 255) 0px 0px 10px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
-
+#name {
+  text-transform: lowercase;
+}
 .winner::before, .winner::after {
-  font-size: 42px;
-  text-shadow: rgb(217, 255, 0) 0px 0px 10px;
-  color: rgb(255, 128, 0);
-  line-height: 50px;  
-  height: 46px;
-  width: 46px;
-  margin: 10px;
-  font-family: courier;
-  content: "☆";
   animation: 2.5s rotate infinite;
   animation-timing-function: linear;
+  color: rgb(255, 128, 0);
+  content: "☆";
+  font-family: courier;
+  font-size: 42px;  
+  height: 46px;
+  line-height: 50px;
+  margin: 10px;
   text-align: center;
-
+  text-shadow: rgb(217, 255, 0) 0px 0px 10px;
+  width: 46px;
 }
+
+
 
 .hidden {
   display:none;
 }
 h3 {
+  font-size: 24px;
   text-align: center;
 }
 
 .settings {
   border: 3px solid black;
   box-shadow: 2px 4px 0 black;
-
   box-sizing: border-box;
   font-family: 'Major Mono Display', monospace;
   font-weight: 500;
-  height: 300px;
+  min-height: 350px;
   left: 0;
   margin: auto;
   padding: 20px;
@@ -209,17 +215,17 @@ padding: 5px 10px;
 }
 .settingsoption input {
 background: rgba(255, 255, 255, 0.5);
-
 border: none;
 font-weight: 900;
 padding: 2px 10px;
+max-width: 150px;
 }
 
 #closesettings {
-  bottom: 25%;
+  top: -85px;
   font-size: 30px;
   height: 10px;
-  left: 97%;
+  left: 95%;
   position: relative;
   width: 10px;
 }
@@ -236,7 +242,52 @@ padding: 2px 10px;
   color: rgba(255, 255, 255, 0.5);
 }
 
+progress {
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 8px;
+  box-shadow: none !important;
+  height: 10px;
+  left:0;
+  margin: 0 !important;
+  overflow: hidden;
+  padding:0 !important;
+  position: fixed;
+  right:0;
+  top: 0;
+  width: 100vw;
+}
+progress::-webkit-progress-bar {
+  background-color: transparent;
+  border: none !important;
+  /* border-radius: 8px; */
+  box-shadow: none !important;
+  height: 10px;
+  overflow: hidden;
+  width: 100vw;
+}
+progress::-webkit-progress-value {
+  background-color: rgba(255, 255, 255, 0.5);
+  height: 10px;
+  overflow: hidden;
+  width: 100vw;
+}
+progress::-moz-progress-bar {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none !important;
+  /* border-radius: 8px; */
+  box-shadow: none !important;
+  height: 10px;
+  overflow: hidden;
+}
 
+progress#progressBar:hover:before {
+  color:black;
+  background-color: rgb(51, 255, 0);
+  font-size: 42px;
+  display: block;
+  content: attr(value);
+}
 
   /* Animation */
    .waves {

@@ -1,6 +1,3 @@
-//let max = 100;
-// 20 is for now - just to make faster trials
-
 const btnStart = document.querySelector('#start');
 const btnSurrender = document.querySelector('#surrender');
 const announce = document.querySelector('#announce');
@@ -13,8 +10,10 @@ const btnSetClose = document.querySelector('#closesettings');
 const wrapper = document.querySelector('.wrapper');
 const rangeMaxInput = document.querySelector('#inputmax');
 const maxInput = document.querySelector('#max');
+const progressBar = document.querySelector('#progress');
 const min = 1;
 
+let playerName = document.querySelector('#name').value;
 let max = +maxInput.value;
 let rangeMax = +rangeMaxInput.value; 
 let sum;
@@ -51,37 +50,38 @@ btnsettings.addEventListener('click', ()=> {
     if (gameStarted === 0){
     settingsWindow.classList.remove("hidden");
     wrapper.classList.add("hidden");} else {
-        btnsettings.innerText = "Can't open settings while the game is active!"
+        btnsettings.innerText = "can't open settings while the game is active!"
     }
 });
 
 btnSetClose.addEventListener('click', ()=> {
     rangeMax = +rangeMaxInput.value; 
     max = +maxInput.value;
+    playerName = document.querySelector('#name').value;
     settingsWindow.classList.add("hidden");
     wrapper.classList.remove("hidden");
-
     generateButtons();
 })
-// MISSION: when button "Start" is clicked, there should be 
-// an annoucement "You're first" or "I'm first"
+
+function progressUpdate() {
+    progressBar.max = max;
+    progressBar.value = sum;
+}
 
 const start = () => {
     gameStarted = 1;
     sum = 0;
     log.innerText = '';
     playerNum = '';
-    const choosePlayer = ["Player is first", "Computer is first"];
-    //let turn = Math.round(Math.random());
+    const choosePlayer = [`${playerName} is first`, `Computer is first`];
     whosTurn = getRand(0, 1);
     announce.classList.remove("winner")
-
     announce.innerText = choosePlayer[whosTurn];
     btnStart.removeEventListener('click', start);
     btnStart.classList.replace('btn-enabled', 'btn-disabled');
     btnSurrender.addEventListener('click', surrender);
     btnSurrender.classList.replace('btn-disabled', 'btn-enabled');
-    btnStart.innerHTML = `First to ${max} wins!`;
+    btnStart.innerHTML = `first to ${max} wins!`;
 
     if (whosTurn === 1) computerTurn();
 };
@@ -92,8 +92,8 @@ const getRand = (min, max) => {
 
 
 const computerTurn = () => {
-    btnStart.innerHTML = `First to ${max} wins!`;
-
+    progressUpdate();
+    btnStart.innerHTML = `first to ${max} wins!`;
     playerNum = '';
     // let compNum = getRand(min,rangeMax);
     let compNum;
@@ -106,15 +106,17 @@ const computerTurn = () => {
     sum += compNum;
     announce.innerText = `Computer's turn`;
     function aiThink() {
-        timeout = setTimeout(alertFunc, 1000);
+        timeout = setTimeout(alertFunc, 800);
     }
     function alertFunc() {
+    progressUpdate()
+
         log.innerHTML += `<span>Computer has chosen ${compNum}, the sum now is ${sum}</span> <br>`;
-        if (sum < rangeMax) {
-        announce.innerText = `Player's turn`;}
+        if ((sum + rangeMax) < max) { 
+        announce.innerText = `${playerName}'s turn`;
+    }
     }
     aiThink();
-    // check if computer has WON 
     ifWin();
     whosTurn = 0;
 };
@@ -122,7 +124,9 @@ const computerTurn = () => {
 const playerTurn = () => {
     btnStart.innerHTML = `First to ${max} wins!`;
     sum += playerNum;
-    log.innerHTML += `<span>Player has chosen ${playerNum}, the sum now is ${sum}</span><br>`;
+    progressUpdate()
+    log.innerHTML += `<span>${playerName} has chosen ${playerNum}, the sum now is ${sum}</span><br>`;
+    log.scrollTop = log.scrollHeight;
     if (!ifWin()) {
         whosTurn = 1;
         computerTurn();
@@ -130,11 +134,21 @@ const playerTurn = () => {
 };
 
 const ifWin = () => {
-    const whoWon = ['Player won', 'Computer won'];
+    const whoWon = ['computer won', playerName + ' won'];
     if (sum >= max) {
-        announce.innerHTML = whoWon[whosTurn];
-        btnStart.innerHTML = `Play again`;
-        announce.classList.add("winner")
+        function announceWinner() {
+            if (whosTurn = 1) {
+            timeout = setTimeout(printWinner, 1200);
+            } else {
+            timeout = setTimeout(printWinner, 100);
+            }
+        }
+        function printWinner() {
+            announce.innerHTML = whoWon[whosTurn];
+            btnStart.innerHTML = `play again`;
+            announce.classList.add("winner")
+        }
+        announceWinner();
         btnStart.addEventListener('click', start);
         btnStart.classList.replace('btn-disabled', 'btn-enabled');
         gameStarted = 0;
@@ -148,9 +162,11 @@ const surrender = () => {
     btnStart.classList.replace('btn-disabled', 'btn-enabled');
     btnSurrender.removeEventListener('click', surrender);
     btnSurrender.classList.replace('btn-enabled', 'btn-disabled');
-    btnStart.innerHTML = `Play again`;
+    btnStart.innerHTML = `play again`;
+    sum = 0;
     gameStarted = 0;
-    btnsettings.innerHTML = "Settings";
+    progressUpdate();
+    btnsettings.innerHTML = "settings";
 };
 
 btnStart.addEventListener('click', start);

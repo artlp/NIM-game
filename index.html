@@ -32,12 +32,13 @@
         </div>
 
         <div class="wrapper">
-            <button id="start">Start the game</button>
-            <button id="opensettings">Settings</button>
+            <progress id="progress" value="0" max="40"></progress>
+            <button id="start">start the game</button>
+            <button id="opensettings">settings</button>
             <div class="gamebuttons"></div>
             <section id="announce">Announcements</section>
             <section id="log">Log</section>
-            <button id="surrender">Surrender</button>
+            <button id="surrender">surrender</button>
         </div>
             <div class="settings hidden">
             <h3>SETTINGS</h3>
@@ -46,6 +47,7 @@
             </div>
 
             <div class="settingsoption">choose maximum input (4-12):             <input type="number" name="" id="inputmax" value="8" min="4" max="12"></div>
+            <div class="settingsoption">change player name:             <input type="text" name="" id="name" value="Player"></div>
 
         </div>
 
