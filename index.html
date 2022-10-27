@@ -12,7 +12,6 @@
 <!-- TODO -->
     <body>
         <div class="header">
-            <!-- <h1>NIM GAME</h1> -->
             <h1>
                 <span>N</span><span>I</span><span>M</span>&nbsp;<span>G</span><span>A</span><span>M</span><span>E</span>
             </h1>
@@ -34,12 +33,23 @@
 
         <div class="wrapper">
             <button id="start">Start the game</button>
-            <input type="number" placeholder="Enter your number" id="num">
+            <button id="opensettings">Settings</button>
+            <div class="gamebuttons"></div>
             <section id="announce">Announcements</section>
             <section id="log">Log</section>
             <button id="surrender">Surrender</button>
         </div>
+        <div class="settings hidden">
+            <h3>SETTINGS</h3>
+            <div id="closesettings">&#x2715</div>
+            choose final target:
+            <input type="number" name="" id="max" value="40" min="20" max="200">
 
+            <br>
+
+            choose maximum input: 
+            <input type="number" name="" id="rangemax" value="8" min="4" max="12">
+        </div>
             <ul class="circles">
                     <li></li>
                     <li></li>
