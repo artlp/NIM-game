@@ -1,11 +1,5 @@
 //let max = 100;
 // 20 is for now - just to make faster trials
-let max = +document.querySelector("#max").value;
-let rangeMax = +document.querySelector("#rangemax").value; // The player may input numbers from 1 to 9
-let sum;
-let whosTurn;
-let playerNum;
-let gameStarted = 0;
 
 const btnStart = document.querySelector('#start');
 const btnSurrender = document.querySelector('#surrender');
@@ -18,8 +12,17 @@ const settingsWindow = document.querySelector('.settings');
 const btnsettings = document.querySelector('#opensettings');
 const btnSetClose = document.querySelector('#closesettings');
 const wrapper = document.querySelector('.wrapper');
-const rangeMaxInput = document.querySelector('#rangemax');
+const rangeMaxInput = document.querySelector('#inputmax');
 const maxInput = document.querySelector('#max');
+
+let max = +maxInput.value;
+let rangeMax = +rangeMaxInput.value; // The player may input numbers from 1 to 9
+let sum;
+let whosTurn;
+let playerNum;
+let gameStarted = 0;
+
+
 
 generateButtons();
 // rangeMaxInput.addEventListener("input", generateButtons);
@@ -53,8 +56,8 @@ btnsettings.addEventListener('click', ()=> {
 });
 
 btnSetClose.addEventListener('click', ()=> {
-    rangeMax = +document.querySelector("#rangemax").value; 
-    max = +document.querySelector("#max").value;
+    rangeMax = +rangeMaxInput.value; 
+    max = +maxInput.value;
     settingsWindow.classList.add("hidden");
     wrapper.classList.remove("hidden");
 
@@ -185,10 +188,10 @@ btnStart.addEventListener('click', start);
 
 maxInput.addEventListener('change', () => {
     
-    if (+maxInput.value > maxInput.max) {
-        maxInput.value = maxInput.max; 
-    } else if (maxInput.value < maxInput.min) {
-        maxInput.value = maxInput.min;
+    if (+maxInput.value >= +maxInput.max) {
+        maxInput.value = +maxInput.max; 
+    } else if (+maxInput.value <= +maxInput.min) {
+        maxInput.value = +maxInput.min;
     } else {
     }
 });
@@ -196,10 +199,10 @@ maxInput.addEventListener('change', () => {
 rangeMaxInput.addEventListener('change', () => {
     // console.log(+rangeMaxInput.value, rangeMaxInput.min, rangeMaxInput.max);
     // inputblock2 = +rangeMaxInput.max;
-    if (+rangeMaxInput.value > rangeMaxInput.max) {
-        rangeMaxInput.value = rangeMaxInput.max; 
-    } else if (rangeMaxInput.value < rangeMaxInput.min) {
-        rangeMaxInput.value = rangeMaxInput.min;
+    if (+rangeMaxInput.value >= +rangeMaxInput.max) {
+        rangeMaxInput.value = +rangeMaxInput.max; 
+    } else if (+rangeMaxInput.value <= +rangeMaxInput.min) {
+        rangeMaxInput.value = +rangeMaxInput.min;
     } else {
     }
 });
