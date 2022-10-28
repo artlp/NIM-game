@@ -3,7 +3,6 @@ const btnSurrender = document.querySelector('#surrender');
 const announce = document.querySelector('#announce');
 const log = document.querySelector('#log');
 const btnDiv = document.querySelector('.gamebuttons');
-const numberButtons = document.querySelector(".number-buttons");
 const settingsWindow = document.querySelector('.settings');
 const btnsettings = document.querySelector('#opensettings');
 const btnSetClose = document.querySelector('#closesettings');
@@ -24,11 +23,9 @@ let gameStarted = 0;
 
 
 generateButtons();
-// rangeMaxInput.addEventListener("input", generateButtons);
 
 function generateButtons() {
     btnDiv.innerHTML = "";
-    // rangeMax = +document.querySelector("#rangemax").value; 
     for (i = 1; i <= rangeMax; i++) {
 
         let button = document.createElement("button");
@@ -114,9 +111,9 @@ const computerTurn = () => {
         progressUpdate();
         log.innerHTML += `<span>Computer has chosen ${compNum}, the sum now is ${sum}</span> <br>`;
         log.scrollTop = log.scrollHeight;
-        if ((sum + rangeMax) < max) {
+        // if ((sum + rangeMax) < max) {
             announce.innerText = `${playerName}'s turn`;
-        }
+        // }
     }
     aiThink();
     ifWin();
@@ -141,8 +138,10 @@ const ifWin = () => {
         function announceWinner() {
             if (whosTurn = 1) {
                 timeout = setTimeout(printWinner, 1200);
+            } else if (whosTurn = 0){
+                timeout = setTimeout(printWinner, 2000);
             } else {
-                timeout = setTimeout(printWinner, 100);
+                alert("whosturn???");
             }
         }
         function printWinner() {
@@ -159,7 +158,8 @@ const ifWin = () => {
     return false;
 };
 const surrender = () => {
-    announce.innerText = 'You looooose, na-na-na ☠️';
+    log.innerHTML += `<span class="red">${playerName} surrendered</span>`;
+    announce.innerHTML = `Game stopped, adjust settings or start again with the same settings`
     btnStart.addEventListener('click', start);
     btnStart.classList.replace('btn-disabled', 'btn-enabled');
     btnSurrender.removeEventListener('click', surrender);

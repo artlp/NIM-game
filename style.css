@@ -105,6 +105,10 @@ box-shadow: 2px 4px 0 black;
 margin: 3px;
 width: 50px;
 }
+.red {
+  color: crimson;
+  font-weight: 700px;
+}
 
 .wrapper section {
     border: 3px solid black;
@@ -267,26 +271,18 @@ progress::-webkit-progress-bar {
   width: 100vw;
 }
 progress::-webkit-progress-value {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.25);
   height: 10px;
   overflow: hidden;
   width: 100vw;
 }
 progress::-moz-progress-bar {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.25);
   border: none !important;
   /* border-radius: 8px; */
   box-shadow: none !important;
   height: 10px;
   overflow: hidden;
-}
-
-progress#progressBar:hover:before {
-  color:black;
-  background-color: rgb(51, 255, 0);
-  font-size: 42px;
-  display: block;
-  content: attr(value);
 }
 
   /* Animation */

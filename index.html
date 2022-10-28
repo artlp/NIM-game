@@ -6,10 +6,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>NIM game</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
         <link rel="stylesheet" href="./normalize.css">
         <link rel="stylesheet" href="./style.css">
     </head>
-<!-- TODO -->
+    <!-- TODO -->
+
     <body>
         <div class="header">
             <h1>
@@ -28,7 +33,7 @@
                     <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
                 </g>
             </svg>
- 
+
         </div>
 
         <div class="wrapper">
@@ -36,34 +41,37 @@
             <button id="start">start the game</button>
             <button id="opensettings">settings</button>
             <div class="gamebuttons"></div>
-            <section id="announce">Announcements</section>
-            <section id="log">Log</section>
+            <section id="announce">Welcome to the NIM game.</section>
+            <section id="log">The goal of the game is to reach the target number by adding smaller numbers in turns with
+                your opponent. Whoever gets to the target number wins.</section>
             <button id="surrender">surrender</button>
         </div>
-            <div class="settings hidden">
+        <div class="settings hidden">
             <h3>SETTINGS</h3>
             <div id="closesettings">&#x2715</div>
-            <div class="settingsoption">choose final target (20-200):             <input type="number" name="" id="max" value="40" min="20" max="200">
+            <div class="settingsoption">choose final target (20-200): <input type="number" name="" id="max" value="40"
+                    min="20" max="200">
             </div>
 
-            <div class="settingsoption">choose maximum input (4-12):             <input type="number" name="" id="inputmax" value="8" min="4" max="12"></div>
-            <div class="settingsoption">change player name:             <input type="text" name="" id="name" value="Player"></div>
+            <div class="settingsoption">choose maximum input (4-12): <input type="number" name="" id="inputmax"
+                    value="8" min="4" max="12"></div>
+            <div class="settingsoption">change player name: <input type="text" name="" id="name" value="Player"></div>
 
         </div>
 
-        
-            <ul class="circles">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-            </ul>
+
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
 
         <script src="./script.js"></script>
     </body>
