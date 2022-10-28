@@ -142,7 +142,7 @@ const ifWin = () => {
                 timeout = setTimeout(printWinner, 2000);
             } else {
                 alert("whosturn???");
-            }
+            } //TODO: USELESS CHECK
         }
         function printWinner() {
             announce.innerHTML = whoWon[whosTurn];
@@ -158,6 +158,7 @@ const ifWin = () => {
     return false;
 };
 const surrender = () => {
+    announce.classList.remove("winner");
     log.innerHTML += `<span class="red">${playerName} surrendered</span>`;
     announce.innerHTML = `Game stopped, adjust settings or start again with the same settings`
     btnStart.addEventListener('click', start);
